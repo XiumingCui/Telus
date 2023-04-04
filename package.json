@@ -8,10 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "server": "nodemon --watch ./server ./server/server.js",
-    "start-with-proxy": "ng serve --proxy-config ./proxy.json",
-    "dev": "concurrently --kill-others \"npm run start-with-proxy\" \"npm run server\""
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/animations": "^15.1.2",
