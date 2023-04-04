@@ -1,0 +1,125 @@
+<div class="row" *ngIf="formLoaded; else loadingTemplate">
+  <div class="col-sm-8 offset-sm-2">
+    <h2>Create New Offer</h2>
+
+    <div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">&#42;Offer Id</label>&nbsp;&nbsp;
+          <input
+            formControlName="offerId"
+            class="form-control"
+            id="offerId"
+            placeholder="Please enter offerId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Recurring Price</label>&nbsp;&nbsp;
+          <input
+            formControlName="recurringPrice"
+            class="form-control"
+            id="recurringPrice"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Recurring Volume</label>&nbsp;&nbsp;
+          <input
+            formControlName="recurringVolume"
+            class="form-control"
+            id="recurringVolume"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Recurring Period</label>&nbsp;&nbsp;
+          <input
+            formControlName="recurringPeriod"
+            class="form-control"
+            id="recurringPeriod"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Effective Time</label>&nbsp;&nbsp;
+          <input
+            formControlName="effectiveTime"
+            class="form-control"
+            id="effectiveTime"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Expiration Time</label>&nbsp;&nbsp;
+          <input
+            formControlName="expirationTime"
+            class="form-control"
+            id="expirationTime"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Network Slice Id</label>&nbsp;&nbsp;
+          <input
+            formControlName="networkSliceId"
+            class="form-control"
+            id="networkSliceId"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Network Speed</label>&nbsp;&nbsp;
+          <input
+            formControlName="networkSpeed"
+            class="form-control"
+            id="networkSpeed"
+          />
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            <i class="bi-save mr-1"></i>
+            Create New Offer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<h2>Existing Offers</h2>
+<!-- <table class="table table-hover" *ngIf="offers$| async as offers else loadingTemplate"> -->
+<table class="table table-hover" *ngIf="offers; else loadingTemplate">
+  <thead>
+    <tr>
+      <th>Offer Id</th>
+      <th>Recurring Price</th>
+      <th>Recurring Volume</th>
+      <th>Recurring Period</th>
+      <th>Effective Time</th>
+      <th>Expiration Time</th>
+      <th>Network Slice Id</th>
+      <th>Network Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let offer of offers">
+      <td>{{ offer.offerId }}</td>
+      <td>{{ offer.recurringPrice }}</td>
+      <td>{{ offer.recurringVolume }}</td>
+      <td>{{ offer.recurringPeriod }}</td>
+      <td>{{ offer.effectiveTime }}</td>
+      <td>{{ offer.expirationTime }}</td>
+      <td>{{ offer.networkSliceId }}</td>
+      <td>{{ offer.networkSpeed }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteOffer(offer)">
+          <i class="bi-x"></i> Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loadingTemplate>
+  <p>
+    <span class="spinner-border spinner-border-sm mr-1"></span> Loading, please
+    wait...
+  </p>
+</ng-template>

@@ -1,0 +1,97 @@
+<div class="row" *ngIf="formLoaded; else loadingTemplate">
+  <div class="col-sm-8 offset-sm-2">
+    <h2>Create New Order</h2>
+
+    <div>
+      <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">&#42;Order Id</label>&nbsp;&nbsp;
+          <input
+            formControlName="orderId"
+            id="orderId"
+            placeholder="Please enter orderId"
+            required
+          />
+        </div>
+        <label for="customerType">&#42;Customer Type</label>&nbsp;&nbsp;
+        <select
+          name="purchaseType"
+          id="purchase-Type"
+          required
+          [(ngModel)]="selectedOption"
+        >
+          <option *ngFor="let option of options" [value]="option.value">
+            {{ option.name }}
+          </option>
+        </select>
+        <div>
+          <div>
+            <label for="groupId">Group Id</label>&nbsp;&nbsp;
+            <input
+              formControlName="groupId"
+              id="groupId"
+              placeholder="Please enter groupId"
+            />
+          </div>
+          <div>
+            <label for="customerId">Customer Id</label>&nbsp;&nbsp;
+            <input
+              formControlName="customerId"
+              id="customerId"
+              placeholder="Please enter customerId"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="offerId">Offer Id</label>&nbsp;&nbsp;
+          <input formControlName="offerId" id="offerId" />
+        </div>
+        <div>
+          <label for="purchaseTime">Purchase Time</label>&nbsp;&nbsp;
+          <input formControlName="purchaseTime" id="purchaseTime" />
+        </div>
+
+        <div>
+          <button class="btn btn-primary">
+            <span class="spinner-border spinner-border-sm mr-1"></span>
+            <i class="bi-save mr-1"></i>
+            Create New Offer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover" *ngIf="orders; else loadingTemplate">
+  <thead>
+    <tr>
+      <th>Order Id</th>
+      <th>Group Id</th>
+      <th>Customer Id</th>
+      <th>Offer Id</th>
+      <th>Purchase Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.orderId }}</td>
+      <td>{{ order.groupId }}</td>
+      <td>{{ order.customerId }}</td>
+      <td>{{ order.offerId }}</td>
+      <td>{{ order.purchaseTime }}</td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="cancelOrder(order)">
+          <i class="bi-x"></i> Cancel
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #loadingTemplate>
+  <p>
+    <span class="spinner-border spinner-border-sm mr-1"></span> Loading, please
+    wait...
+  </p>
+</ng-template>

@@ -1,0 +1,19 @@
+<h3>Edit Group</h3>
+<div>
+  <p>{{ data.customerIds }}</p>
+  <label>Please enter customerId to be deleted</label><br />
+  <input
+    id="customerId"
+    #customerId
+    placeholder="Please enter the customerId to be deleted"
+  /><br />
+  <button class="primary" (click)="addCusToGroup(customerId)">
+    add this customer to group
+  </button>
+  <button class="primary" (click)="removeCusFromGroup(customerId)">
+    remove this customer from group
+  </button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    Cancel
+  </button>
+</div>

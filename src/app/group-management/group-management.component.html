@@ -1,0 +1,53 @@
+<h2>Group Management</h2>
+
+<h3>Customers</h3>
+
+<ul class="customers">
+  <li>
+    <span class="badge">Customer Id</span>
+    Customer Type
+    <!-- <span class="badge">Customer Id</span>Customer Bill Cycle Customer Type</li> -->
+  </li>
+
+  <li
+    *ngFor="let customer of customers"
+    [class.selected]="customer === selectedCustomer"
+    (click)="onSelect(customer)"
+  >
+    <span class="badge">{{ customer.customerId }}</span>
+    {{ customer.customerType }}
+  </li>
+</ul>
+
+<app-customer-detail [customer]="selectedCustomer"></app-customer-detail>
+<!-- <input id="groupId" #groupId placeholder="Please enter the groupId" /> -->
+<!-- <button class="primary" (click)="addCusToGroup(groupId)">
+  Add customer to group
+</button> -->
+
+<h3>Groups</h3>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Customer GroupId</th>
+      <th>Customer Ids</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let group of groups">
+      <td>{{ group.groupId }}</td>
+      <td>{{ group.customerIds }}</td>
+      <td>
+        <button class="primary" (click)="removeCusFromGroup(group)">
+          Edit Group
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #loadingTemplate>
+  <p>
+    <span class="spinner-border spinner-border-sm mr-1"></span> Loading, please
+    wait...
+  </p>
+</ng-template>
