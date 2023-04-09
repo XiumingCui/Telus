@@ -26,42 +26,6 @@ export class GroupManagementComponent implements OnInit {
     this.selectedCustomer = customer;
   }
 
-  // addCusToGroup(groupId) {
-  //   console.log('groupId: ', groupId.value);
-  //   console.log('this.selectedCustomer: ', this.selectedCustomer.customerId);
-  //   //http.put(customer/{customerId}) to (group/groupId)
-  //   this.groups.forEach((group) => {
-  //     if (group.groupId == parseInt(groupId.value)) {
-  //       let flag = false;
-  //       for (let i = 0; i < group.customerIds.length; i++) {
-  //         if (group.customerIds[i] == this.selectedCustomer.customerId) {
-  //           flag = true;
-  //         }
-  //       }
-  //       if (flag != true) {
-  // const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-  //   data: {
-  //     title: `Confirm adding new customer to group ${group.groupId}`,
-  //     message:
-  //       'Are you sure, you want to add this customer: ' +
-  //       this.selectedCustomer.customerId,
-  //   },
-  // });
-  // confirmDialog.afterClosed().subscribe((result) => {
-  //   if (result.button === 'add') {
-  //     group.customerIds.push(this.selectedCustomer.customerId);
-  //     console.log('group.customerIds AFTER:  ', group.customerIds);
-  //     const newGroupCustomerIds = group.customerIds;
-  //     this.groups.filter(
-  //       (group) => group.groupId == parseInt(groupId.value)
-  //     )[0] = group;
-  //   }
-  // });
-  // }
-  // }
-  //   });
-  // }
-
   createNew() {
     if (this.dialog.openDialogs.length == 0) {
       const dialogRef = this.dialog.open(CreateNewComponent, {
@@ -81,27 +45,34 @@ export class GroupManagementComponent implements OnInit {
 
   deleteCus(tarCustomer) {
     console.log(tarCustomer.customerId);
+    // console.log(this.customers)
 
-    const temp = this.customers.filter((cus) => {
-      //  cus.customerId == tarCustomer.customerId
-      cus.customerId == tarCustomer.customerId;
+    // this.customers.filter(cus=>{
+    //   cus.customerId != tarCustomer.customerId
+    // })
+    // console.log('find ', this.customers.filter(cus=>cus.customerId !== tarCustomer.customerId))
+
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Confirm Remove Customer',
+        message:
+          'Are you sure, you want to remove customer: ' +
+          tarCustomer.customerId,
+      },
     });
-    console.log('temp:', temp);
-    // const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
-    //   data: {
-    //     title: 'Confirm Remove Customer',
-    //     message:
-    //       'Are you sure, you want to remove customer: ' +
-    //       tarCustomer.customerId,
-    //   },
-    // });
-    // confirmDialog.afterClosed().subscribe((result) => {
-    //   if (result === true) {
-    //     this.customers = this.customers.filter((cus) => {
-    //       cus.customerId !== tarCustomer.customerId;
-    //     });
-    //   }
-    // });
+    confirmDialog.afterClosed().subscribe((result) => {
+      if (result === true) {
+        console.log(
+          'filter ',
+          this.customers.filter(
+            (cus) => cus.customerId !== tarCustomer.customerId
+          )
+        );
+        this.customers = this.customers.filter(
+          (cus) => cus.customerId !== tarCustomer.customerId
+        );
+      }
+    });
   }
 
   createGroup() {
@@ -134,15 +105,7 @@ export class GroupManagementComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe((result) => {
         console.log('result::   ', result);
-        if (result.button === 'delete') {
-          console.log('The dialog was closed');
-          console.log(`Dialog result: ${result.data}`);
-          this.groups.forEach((group) => {
-            if (group.groupId == targetGroup.groupId) {
-              group.customerIds = result.data;
-            }
-          });
-        } else if (result.button === 'add') {
+        if (result) {
           console.log('The dialog was closed');
           console.log(`Dialog result: ${result.data}`);
           this.groups.forEach((group) => {

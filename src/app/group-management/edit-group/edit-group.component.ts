@@ -15,31 +15,31 @@ export class EditGroupComponent implements OnInit {
   ngOnInit() {}
 
   addCusToGroup(targetCustomerId) {
-    console.log('customer need to be added', parseInt(targetCustomerId.value));
-    console.log(this.data);
+    // console.log('customer need to be added', parseInt(targetCustomerId.value));
+    // console.log(this.data);
     if (!this.data.customerIds.includes(parseInt(targetCustomerId.value))) {
       this.data.customerIds.push(parseInt(targetCustomerId.value));
     }
-    this.dialogRef.close({ data: this.data.customerIds, button: 'add' });
+    this.dialogRef.close({ data: this.data.customerIds});
   }
 
   removeCusFromGroup(targetCustomerId) {
-    console.log(
-      'customer need to be deleted',
-      parseInt(targetCustomerId.value)
-    );
+    // console.log(
+    //   'customer need to be deleted',
+    //   parseInt(targetCustomerId.value)
+    // );
 
-    console.log('groupId', this.data.groupId);
-    console.log('all customer in this group', this.data.customerIds);
+    // console.log('groupId', this.data.groupId);
+    // console.log('all customer in this group', this.data.customerIds);
     //check if customer is in the group
     //delete customer from group
     if (this.data.customerIds.includes(parseInt(targetCustomerId.value))) {
       this.data.customerIds = this.data.customerIds.filter(
         (customerId) => customerId !== parseInt(targetCustomerId.value)
       );
-      console.log('all customer in this group AFTER', this.data.customerIds);
+      // console.log('all customer in this group AFTER', this.data.customerIds);
     }
-    this.dialogRef.close({ data: this.data.customerIds, button: 'delete' });
+    this.dialogRef.close({ data: this.data.customerIds});
   }
 
   closeDialog() {

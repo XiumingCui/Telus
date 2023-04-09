@@ -28,7 +28,7 @@ export class CustomerOfferComponent implements OnInit {
   constructor(private fb: FormBuilder, private dialog: MatDialog) {}
 
   ngOnInit() {
-    console.log(this.orders);
+    // console.log(this.orders);
     this.orderForm = this.fb.group({
       orderId: [],
       groupId: [],
@@ -45,7 +45,7 @@ export class CustomerOfferComponent implements OnInit {
   }
 
   private createOrder(newOrder: Order) {
-    console.log(newOrder);
+    // console.log(newOrder);
     // this.location.back();
     // this.orderService.create(this.form.value)
     //   .subscribe({
@@ -78,7 +78,7 @@ export class CustomerOfferComponent implements OnInit {
   }
 
   cancelOrder(order: Order) {
-    console.log(order);
+    // console.log(order);
     const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
       data: {
         title: 'Confirm Remove order',
