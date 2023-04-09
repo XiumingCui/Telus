@@ -62,15 +62,10 @@ export class GroupManagementComponent implements OnInit {
     });
     confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
-        console.log(
-          'filter ',
-          this.customers.filter(
-            (cus) => cus.customerId !== tarCustomer.customerId
-          )
-        );
         this.customers = this.customers.filter(
           (cus) => cus.customerId !== tarCustomer.customerId
         );
+        this.selectedCustomer= new Customer
       }
     });
   }

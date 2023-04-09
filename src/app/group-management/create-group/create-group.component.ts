@@ -33,21 +33,12 @@ export class CreateGroupComponent implements OnInit {
       'customer to be added',
       typeof parseInt(targetCustomerId.value)
     );
-    console.log('322:  ', this.customersInNewGroup.length);
-    console.log(
-      '321:  ',
-      this.customersInNewGroup.includes(parseInt(targetCustomerId.value))
-    );
     if (
       this.customersInNewGroup.length == 0 ||
       !this.customersInNewGroup.includes(parseInt(targetCustomerId.value))
     ) {
       this.customersInNewGroup.push(parseInt(targetCustomerId.value));
     }
-    // var getValue= document.getElementById("customerId");
-    // if (getValue && getValue.value !="") {
-    //     getValue.value = "";
-    // }
   }
 
   createGroup(groupId) {
