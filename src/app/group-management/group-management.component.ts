@@ -7,6 +7,7 @@ import { CUSTOMERS } from '../mock-data/customers';
 import { GROUPS } from '../mock-data/groups';
 import { Customer } from '../models/customer';
 import { EditGroupComponent } from './edit-group/edit-group.component';
+import { CreateNewComponent } from './create-new/create-new.component';
 
 @Component({
   selector: 'app-group-management',
@@ -60,35 +61,63 @@ export class GroupManagementComponent implements OnInit {
   //   });
   // }
 
-  removeCusFromGroup(targetGroup) {
-    const dialogRef = this.dialog.open(EditGroupComponent, {
-      data: {
-        groupId: targetGroup.groupId,
-        customerIds: targetGroup.customerIds,
-      },
-      width: '500px',
-      height: '200px',
-    });
+  createNew(type: string) {
+    if (this.dialog.openDialogs.length == 0) {
+      const dialogRef = this.dialog.open(CreateNewComponent, {
+        data: {
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('result::   ', result);
-      if (result.button === 'delete') {
-        console.log('The dialog was closed');
-        console.log(`Dialog result: ${result.data}`);
-        this.groups.forEach((group) => {
-          if (group.groupId == targetGroup.groupId) {
-            group.customerIds = result.data;
-          }
-        });
-      } else if (result.button === 'add') {
-        console.log('The dialog was closed');
-        console.log(`Dialog result: ${result.data}`);
-        this.groups.forEach((group) => {
-          if (group.groupId == targetGroup.groupId) {
-            group.customerIds = result.data;
-          }
-        });
-      }
-    });
+          type: type,
+        },
+        width: '500px',
+        height: '200px',
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('result::   ', result);
+        if (type === 'customer') {
+          console.log('The dialog was closed');
+          console.log(`Dialog result: ${result.data}`);
+          // this.customers.push(result)
+        } else if (type === 'group') {
+          console.log('The dialog was closed');
+          console.log(`Dialog result: ${result.data}`);
+          // this.groups.push(result);
+        }
+      });
+    }
+  }
+
+  editGroup(targetGroup) {
+    if (this.dialog.openDialogs.length == 0) {
+      const dialogRef = this.dialog.open(EditGroupComponent, {
+        data: {
+          groupId: targetGroup.groupId,
+          customerIds: targetGroup.customerIds,
+        },
+        width: '500px',
+        height: '200px',
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('result::   ', result);
+        if (result.button === 'delete') {
+          console.log('The dialog was closed');
+          console.log(`Dialog result: ${result.data}`);
+          this.groups.forEach((group) => {
+            if (group.groupId == targetGroup.groupId) {
+              group.customerIds = result.data;
+            }
+          });
+        } else if (result.button === 'add') {
+          console.log('The dialog was closed');
+          console.log(`Dialog result: ${result.data}`);
+          this.groups.forEach((group) => {
+            if (group.groupId == targetGroup.groupId) {
+              group.customerIds = result.data;
+            }
+          });
+        }
+      });
+    }
   }
 }

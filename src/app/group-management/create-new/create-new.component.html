@@ -1,0 +1,94 @@
+<h3>{{ type == 'customer' ? 'Create New Customer' : 'Create New Group' }}</h3>
+
+<div *ngIf="type == 'customer'">
+  <form
+    [formGroup]="newCustomer"
+    class="mb-4"
+    autocomplete="off"
+    (submit)="onCustomerSubmit()"
+  >
+    <div class="form-group">
+      <label>Enter New Customer Id</label> &nbsp;&nbsp;
+      <input
+        class="form-control"
+        formControlName="customerId"
+        required
+        placeholder="Customer Id"
+      />
+    </div>
+    <div class="form-group">
+      <label>Enter Customer Bill Cycle</label> &nbsp;&nbsp;
+      <select formControlName="customerBillCycle">
+        <option
+          *ngFor="let billCycle of customerBillCycleEnums"
+          [value]="billCycle"
+        >
+          {{ customerBillCycle[billCycle] }}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Enter Customer Type</label> &nbsp;&nbsp;
+      <select formControlName="customerType">
+        <option *ngFor="let type of customerTypeEnums" [value]="type">
+          {{ customerType[type] }}
+        </option>
+      </select>
+    </div>
+    <div class="d-flex">
+      <div class="align-content-end flex-fill">
+        <div class="form-row">
+          <div class="flex-fill text-right">
+            <button
+              type="submit"
+              class="btn btn-default btn-lg"
+              [disabled]="newCustomer.invalid"
+            >
+              Submit
+            </button>
+            <button
+              mat-button
+              (click)="closeDialog()"
+              mat-flat-button
+              color="warn"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="type == 'group'">
+  <label>Enter New Group Id</label> &nbsp;&nbsp;
+  <input id="groupId" #groupId required placeholder="Group Id" /><br />
+  <label>Enter Customers in the group</label> &nbsp;&nbsp;
+  <input id="customerId" #customerId />
+  <button (click)="addCustomer(customerId)" class="primary">
+    Add Customer to Group
+  </button>
+  <ul>
+    <li
+      *ngFor="
+        let cusInNewGroup of customersInNewGroup;
+        let i = index;
+        trackBy: trackByFn
+      "
+    >
+      {{ cusInNewGroup }}
+    </li>
+  </ul>
+
+  <button
+    (click)="submitNewGroup(groupId)"
+    class="primary"
+    [disabled]="groupId"
+  >
+    Submit
+  </button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    Cancel
+  </button>
+</div>

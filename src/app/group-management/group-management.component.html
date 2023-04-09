@@ -2,6 +2,10 @@
 
 <h3>Customers</h3>
 
+<button class="primary" (click)="createNew('customer')">
+  Create New Customer
+</button>
+
 <ul class="customers">
   <li>
     <span class="badge">Customer Id</span>
@@ -26,6 +30,7 @@
 </button> -->
 
 <h3>Groups</h3>
+<button class="primary" (click)="createNew('group')">Create New Group</button>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -38,9 +43,7 @@
       <td>{{ group.groupId }}</td>
       <td>{{ group.customerIds }}</td>
       <td>
-        <button class="primary" (click)="removeCusFromGroup(group)">
-          Edit Group
-        </button>
+        <button class="primary" (click)="editGroup(group)">Edit Group</button>
       </td>
     </tr>
   </tbody>
