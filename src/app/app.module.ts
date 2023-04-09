@@ -20,6 +20,7 @@ import { CustomerOfferComponent } from './customer-offer/customer-offer.componen
 import { GroupManagementComponent } from './group-management/group-management.component';
 import { CustomerDetailComponent } from './group-management/customer-detail/customer-detail.component';
 import { CreateNewComponent } from './group-management/create-new/create-new.component';
+import { CreateGroupComponent } from './group-management/create-group/create-group.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     CustomerDetailComponent,
     ConfirmDialogComponent,
     CreateNewComponent,
+    CreateGroupComponent,
   ],
   imports: [
     BrowserModule,

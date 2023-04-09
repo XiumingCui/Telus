@@ -27,47 +27,18 @@ export class CreateNewComponent implements OnInit {
     customerType: [],
   });
 
-  newGroup = this.fb.group({
-    groupId: [],
-    customerIds: [],
-  });
-
   constructor(
     public dialogRef: MatDialogRef<CreateNewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
   ) {
-    console.log(this.customerBillCycleEnums);
     console.log(data);
-  }
-
-  type = this.data.type;
-  customersInNewGroup: number[] = [];
-  trackByFn(index, item) {
-    return index;
   }
   ngOnInit() {}
 
   onCustomerSubmit() {
     console.log(this.newCustomer.value);
-  }
-
-  addCustomer(targetCustomerId) {
-    // console.log('customer to be added', parseInt(targetCustomerId.value));
-    this.customersInNewGroup.push(parseInt(targetCustomerId.value));
-    // console.log('customerIDs', this.customersInNewGroup);
-  }
-  submitNewGroup(groupId) {
-    const customerIds = [];
-    if (this.newGroup.value.customerIds) {
-      console.log('customerIDs', this.customersInNewGroup);
-
-      // customerIds.push();
-
-      // const afterIds = this.newGroup.value.customerIds.split(",")
-
-      // console.log('after: ', customerIds);
-    }
+    this.dialogRef.close({ data:this.newCustomer.value})
   }
 
   closeDialog() {

@@ -1,0 +1,32 @@
+<h3>Create New Group</h3>
+
+<div>
+  <label>Enter New Group Id</label> &nbsp;&nbsp;
+  <input id="groupId" #groupId required placeholder="Group Id" /><br />
+  <label>Enter Customers in the group</label> &nbsp;&nbsp;
+  <input id="customerId" #customerId />
+  <button (click)="addCustomer(customerId)" class="primary">
+    Add Customer to Group
+  </button>
+  <ul>
+    <li
+      *ngFor="
+        let cusInNewGroup of customersInNewGroup;
+        let i = index;
+        trackBy: trackByFn
+      "
+    >
+      {{ cusInNewGroup }}
+    </li>
+  </ul>
+
+  <button
+    (click)="createGroup(groupId)"
+    class="primary"
+  >
+    Submit
+  </button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+    Cancel
+  </button>
+</div>

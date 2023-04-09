@@ -2,9 +2,7 @@
 
 <h3>Customers</h3>
 
-<button class="primary" (click)="createNew('customer')">
-  Create New Customer
-</button>
+<button class="primary" (click)="createNew()">Create New Customer</button>
 
 <ul class="customers">
   <li>
@@ -24,13 +22,20 @@
 </ul>
 
 <app-customer-detail [customer]="selectedCustomer"></app-customer-detail>
+<!-- <button
+  class="primary"
+  *ngIf="selectedCustomer"
+  (click)="deleteCus(selectedCustomer)"
+>
+  Delete Customer
+</button> -->
 <!-- <input id="groupId" #groupId placeholder="Please enter the groupId" /> -->
 <!-- <button class="primary" (click)="addCusToGroup(groupId)">
   Add customer to group
 </button> -->
 
 <h3>Groups</h3>
-<button class="primary" (click)="createNew('group')">Create New Group</button>
+<button class="primary" (click)="createGroup()">Create New Group</button>
 <table class="table table-hover">
   <thead>
     <tr>

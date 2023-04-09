@@ -8,6 +8,7 @@ import { GROUPS } from '../mock-data/groups';
 import { Customer } from '../models/customer';
 import { EditGroupComponent } from './edit-group/edit-group.component';
 import { CreateNewComponent } from './create-new/create-new.component';
+import { CreateGroupComponent } from './create-group/create-group.component';
 
 @Component({
   selector: 'app-group-management',
@@ -61,28 +62,61 @@ export class GroupManagementComponent implements OnInit {
   //   });
   // }
 
-  createNew(type: string) {
+  createNew() {
     if (this.dialog.openDialogs.length == 0) {
       const dialogRef = this.dialog.open(CreateNewComponent, {
-        data: {
-
-          type: type,
-        },
         width: '500px',
         height: '200px',
       });
 
       dialogRef.afterClosed().subscribe((result) => {
         console.log('result::   ', result);
-        if (type === 'customer') {
-          console.log('The dialog was closed');
-          console.log(`Dialog result: ${result.data}`);
-          // this.customers.push(result)
-        } else if (type === 'group') {
-          console.log('The dialog was closed');
-          console.log(`Dialog result: ${result.data}`);
-          // this.groups.push(result);
-        }
+
+        console.log('The dialog was closed');
+        // console.log(`Dialog result: ${result.data.customerId}`);
+        this.customers.push(result.data);
+      });
+    }
+  }
+
+  deleteCus(tarCustomer) {
+    console.log(tarCustomer.customerId);
+
+    const temp = this.customers.filter((cus) => {
+      //  cus.customerId == tarCustomer.customerId
+      cus.customerId == tarCustomer.customerId;
+    });
+    console.log('temp:', temp);
+    // const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+    //   data: {
+    //     title: 'Confirm Remove Customer',
+    //     message:
+    //       'Are you sure, you want to remove customer: ' +
+    //       tarCustomer.customerId,
+    //   },
+    // });
+    // confirmDialog.afterClosed().subscribe((result) => {
+    //   if (result === true) {
+    //     this.customers = this.customers.filter((cus) => {
+    //       cus.customerId !== tarCustomer.customerId;
+    //     });
+    //   }
+    // });
+  }
+
+  createGroup() {
+    if (this.dialog.openDialogs.length == 0) {
+      const dialogRef = this.dialog.open(CreateGroupComponent, {
+        width: '500px',
+        height: '200px',
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('result::   ', result);
+
+        console.log('The dialog was closed');
+        // console.log(`Dialog result: ${result.data}`);
+        this.groups.push(result);
       });
     }
   }

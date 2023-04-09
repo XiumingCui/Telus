@@ -1,6 +1,6 @@
-<h3>{{ type == 'customer' ? 'Create New Customer' : 'Create New Group' }}</h3>
+<h3>Create New Customer</h3>
 
-<div *ngIf="type == 'customer'">
+<div>
   <form
     [formGroup]="newCustomer"
     class="mb-4"
@@ -59,36 +59,4 @@
       </div>
     </div>
   </form>
-</div>
-
-<div *ngIf="type == 'group'">
-  <label>Enter New Group Id</label> &nbsp;&nbsp;
-  <input id="groupId" #groupId required placeholder="Group Id" /><br />
-  <label>Enter Customers in the group</label> &nbsp;&nbsp;
-  <input id="customerId" #customerId />
-  <button (click)="addCustomer(customerId)" class="primary">
-    Add Customer to Group
-  </button>
-  <ul>
-    <li
-      *ngFor="
-        let cusInNewGroup of customersInNewGroup;
-        let i = index;
-        trackBy: trackByFn
-      "
-    >
-      {{ cusInNewGroup }}
-    </li>
-  </ul>
-
-  <button
-    (click)="submitNewGroup(groupId)"
-    class="primary"
-    [disabled]="groupId"
-  >
-    Submit
-  </button>
-  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
-    Cancel
-  </button>
 </div>
